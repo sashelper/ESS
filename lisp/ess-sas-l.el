@@ -789,16 +789,16 @@ number."
                (back-to-indentation)
                (or (bobp)
                    (looking-at
-                    "data[ ;]\\|proc[ ;]\\|run[ ;]\\|quit[ ;]\\|endsas[ ;]\\|g?options[ ;]\\|%macro[ ;]\\|%mend[ ;]")))
+                    "data[ ;]\\|proc[ ;]\\|run[ ;]\\|quit[ ;]\\|endsas[ ;]\\|g?options[ ;]\\|%macro[ ;]\\|%mend[ ;]\\|end[ ;]")))
              ;;  Case where current statement is DATA, PROC, etc...
              (setq prev-end (point))
              (goto-char (point-min))
              ;;  Added 6/27/94
              ;;  May get fooled if %MACRO, %DO, etc embedded in comments
              (setq indent
-                   (+ (* (- (sas-how-many "^[ \t]*%macro\\|[ \t]+%do"
+                   (+ (* (- (sas-how-many "^[ \t]*%macro\\|[ \t]+%do\\|[ \t]+do"
                                           prev-end)
-                            (sas-how-many "^[ \t]*%mend\\|%end" prev-end))
+                            (sas-how-many "^[ \t]*%mend\\|%end\\|end[ ;]" prev-end))
                          sas-indent-width) comment-col)))  ;; 2/1/95 TDC
             ;;  Case where current line begins with sas-indent-ignore-comment
             ;; added 6/27/94  to leave "* ;" comments alone.
